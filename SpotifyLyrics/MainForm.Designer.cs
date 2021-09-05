@@ -39,7 +39,10 @@ namespace SpotifyLyrics
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.MessageLabel = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // SpotifyWatchDogTimer
@@ -57,7 +60,7 @@ namespace SpotifyLyrics
             this.LyricBox.Name = "LyricBox";
             this.LyricBox.ReadOnly = true;
             this.LyricBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.LyricBox.Size = new System.Drawing.Size(436, 311);
+            this.LyricBox.Size = new System.Drawing.Size(436, 371);
             this.LyricBox.TabIndex = 1;
             // 
             // groupBox1
@@ -86,7 +89,7 @@ namespace SpotifyLyrics
             this.ForceDownloadBtn.Size = new System.Drawing.Size(75, 52);
             this.ForceDownloadBtn.TabIndex = 4;
             this.ForceDownloadBtn.Text = "Download";
-            this.ForceDownloadBtn.UseVisualStyleBackColor = true;
+            this.ForceDownloadBtn.UseVisualStyleBackColor = false;
             this.ForceDownloadBtn.Click += new System.EventHandler(this.ForceDownloadBtn_Click);
             // 
             // SongTitleEdit
@@ -130,22 +133,47 @@ namespace SpotifyLyrics
             // 
             // MessageLabel
             // 
-            this.MessageLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.MessageLabel.Location = new System.Drawing.Point(0, 432);
-            this.MessageLabel.Margin = new System.Windows.Forms.Padding(12);
+            this.MessageLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MessageLabel.Location = new System.Drawing.Point(0, 0);
+            this.MessageLabel.Margin = new System.Windows.Forms.Padding(0);
             this.MessageLabel.Name = "MessageLabel";
             this.MessageLabel.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
-            this.MessageLabel.Size = new System.Drawing.Size(460, 18);
+            this.MessageLabel.Size = new System.Drawing.Size(460, 30);
             this.MessageLabel.TabIndex = 4;
             this.MessageLabel.Tag = "";
             this.MessageLabel.Text = "Ready";
+            this.MessageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.MessageLabel);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 480);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(460, 30);
+            this.panel1.TabIndex = 6;
+            // 
+            // button1
+            // 
+            this.button1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button1.Location = new System.Drawing.Point(419, 0);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(41, 30);
+            this.button1.TabIndex = 5;
+            this.button1.Text = ". . .";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(460, 450);
-            this.Controls.Add(this.MessageLabel);
+            this.ClientSize = new System.Drawing.Size(460, 510);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.LyricBox);
             this.DoubleBuffered = true;
@@ -154,6 +182,7 @@ namespace SpotifyLyrics
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -169,6 +198,8 @@ namespace SpotifyLyrics
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button ForceDownloadBtn;
         private System.Windows.Forms.Label MessageLabel;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

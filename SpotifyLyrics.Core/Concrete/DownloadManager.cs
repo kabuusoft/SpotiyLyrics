@@ -36,6 +36,11 @@ namespace SpotifyLyrics.Core.Concrete
                 foreach (var plugin in _plugins)
                     try
                     {
+                        if (!plugin.IsActive())
+                        {
+                            continue;
+                        }
+
                         var lyricContent = await plugin.DownloadLyric(artist, songTitle);
                         if (!string.IsNullOrEmpty(lyricContent))
                         {

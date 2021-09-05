@@ -9,5 +9,6 @@ namespace SpotifyLyrics.Plugin.Abstract
         string GetVersion();
         string GetAuthor();
         string GetWebSite();
+        bool IsActive();
     }
 }

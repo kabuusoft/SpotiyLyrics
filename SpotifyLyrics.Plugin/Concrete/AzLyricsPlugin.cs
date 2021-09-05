@@ -7,7 +7,7 @@ using SpotifyLyrics.Plugin.Abstract;
 
 namespace SpotifyLyrics.Plugin.Concrete
 {
-    public class AzLyricsPlugin : IPlugin
+    public class AzLyricsPlugin :BasePlugin, IPlugin
     {
         public async Task<string> DownloadLyric(string artist, string title)
         {
@@ -37,9 +37,15 @@ namespace SpotifyLyrics.Plugin.Concrete
             return "https://www.azlyrics.com";
         }
 
+        public bool IsActive()
+        {
+            return true;
+        }
+
+
         private string DoFixParameters(string str)
         {
-            return str.ToLowerInvariant()
+            var tmp = str.ToLowerInvariant()
                 .Replace(" ", "")
                 .Replace("&", "")
                 .Replace("Ö", "ö")
@@ -57,66 +63,10 @@ namespace SpotifyLyrics.Plugin.Concrete
                 .Replace("'", "")
                 .Replace("ö", "o")
                 .Replace("- remastered", "");
+
+            return TurkishCharacterToEnglish(tmp);
         }
-
-        private string DoRemoveTrailingDash(string str)
-        {
-            if (str.EndsWith("-")) return str.Substring(0, str.Length - 1);
-
-            return str;
-        }
-
-        private string DoRemoveLast4CharsIfDigit(string str)
-        {
-            if (str.Length >= 4)
-            {
-                var tmpStr = str.Substring(str.Length - 4);
-                if (int.TryParse(tmpStr, out var _))
-                {
-                    var tmpStr2 = str.Substring(0, str.Length - 4).Trim();
-
-                    return DoRemoveTrailingDash(tmpStr2);
-                }
-
-                return DoRemoveTrailingDash(str);
-            }
-
-            return DoRemoveTrailingDash(str);
-        }
-
-        private string DoRemoveRemastered(string str)
-        {
-            str = str.ToLowerInvariant();
-            var index = str.IndexOf("- remastered", StringComparison.Ordinal);
-            if (index > -1)
-            {
-                return str.Substring(0, index);
-            }
-
-            index = str.IndexOf("remaster", StringComparison.Ordinal);
-            if (index > -1)
-            {
-                var tempStr = str.Substring(0, index).Trim();
-                return DoRemoveLast4CharsIfDigit(tempStr);
-            }
-
-            return str;
-        }
-
-        private string DoRemoveMtvUnplugged(string str)
-        {
-            str = str.ToLowerInvariant();
-            var index = str.IndexOf("- mtv unplugged", StringComparison.Ordinal);
-            if (index > -1) return str.Substring(0, index);
-
-            return str;
-        }
-
-        private string DoRemoveTheFromArtistName(string artist)
-        {
-            return artist.Substring(3).Trim();
-        }
-
+        
         private static async Task<string> DoDownloadSongWithoutTheInName(string fixedArtistName, string fixedTitle)
         {
             var downloadUrl = $"https://www.azlyrics.com/lyrics/{fixedArtistName}/{fixedTitle}.html";

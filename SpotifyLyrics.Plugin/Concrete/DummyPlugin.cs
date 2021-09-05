@@ -29,5 +29,10 @@ namespace SpotifyLyrics.Plugin.Concrete
         {
             return "https://kabuusoft.com";
         }
+
+        public bool IsActive()
+        {
+            return false;
+        }
     }
 }
