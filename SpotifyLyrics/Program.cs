@@ -1,28 +1,30 @@
-using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using SpotifyLyrics.Core.Abstract;
 using SpotifyLyrics.Core.Concrete;
+using SpotifyLyrics.Data.Model;
+using SpotifyLyrics.Data.Services.Abstract;
+using SpotifyLyrics.Data.Services.Concrete;
 
 namespace SpotifyLyrics
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
-        ///  The main entry point for the application.
+        ///     The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var services = new ServiceCollection();
             ConfigureServices(services);
-            using (ServiceProvider serviceProvider = services.BuildServiceProvider())
+            using (var serviceProvider = services.BuildServiceProvider())
             {
                 var form1 = serviceProvider.GetRequiredService<MainForm>();
                 Application.Run(form1);
@@ -33,10 +35,26 @@ namespace SpotifyLyrics
         {
             services.AddSingleton<MainForm>()
                 .AddLogging()
+                .AddDbContext<LyricContext>(OptionsAction)
                 .AddSingleton<ISpotifyManager, SpotifyManager>()
                 .AddSingleton<IPluginManager, PluginManager>()
                 .AddSingleton<IDownloadManager, DownloadManager>()
-                .AddSingleton<ISongNameParser, SongNameParser>();
+                .AddSingleton<ISongNameParser, SongNameParser>()
+                .AddSingleton<ILyricService, LyricService>();
+        }
+
+        private static void OptionsAction(DbContextOptionsBuilder obj)
+        {
+            const string dbFileName = "data.db";
+            string dbFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SpotiyLyrics");
+            if (!Directory.Exists(dbFolderPath))
+            {
+                Directory.CreateDirectory(dbFolderPath);
+            }
+
+            var dbFilePath = Path.Combine(dbFolderPath, dbFileName);
+
+            obj.UseSqlite($"Data Source={dbFilePath}");
         }
     }
 }

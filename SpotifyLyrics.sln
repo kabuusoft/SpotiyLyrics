@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpotifyLyrics", "SpotifyLyrics\SpotifyLyrics.csproj", "{56659F91-BF8E-4F10-BF23-A4E7690A958A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpotifyLyrics", "SpotifyLyrics\SpotifyLyrics.csproj", "{56659F91-BF8E-4F10-BF23-A4E7690A958A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpotifyLyrics.Plugin", "SpotifyLyrics.Plugin\SpotifyLyrics.Plugin.csproj", "{BED3DB02-C0E8-4D17-9118-FAFB7581B0A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpotifyLyrics.Plugin", "SpotifyLyrics.Plugin\SpotifyLyrics.Plugin.csproj", "{BED3DB02-C0E8-4D17-9118-FAFB7581B0A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpotifyLyrics.Core", "SpotifyLyrics.Core\SpotifyLyrics.Core.csproj", "{10314B31-95AC-4315-A3A5-E85D63EF6427}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpotifyLyrics.Core", "SpotifyLyrics.Core\SpotifyLyrics.Core.csproj", "{10314B31-95AC-4315-A3A5-E85D63EF6427}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpotifyLyrics.Data", "SpotifyLyrics.Data\SpotifyLyrics.Data.csproj", "{E2941011-3C88-4B69-B39D-1DCCDBCB7D55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpotifyLyrics.Common", "SpotifyLyrics.Common\SpotifyLyrics.Common.csproj", "{A9EE5725-7DB3-4691-8D09-B61C2F41FCA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{10314B31-95AC-4315-A3A5-E85D63EF6427}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10314B31-95AC-4315-A3A5-E85D63EF6427}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10314B31-95AC-4315-A3A5-E85D63EF6427}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2941011-3C88-4B69-B39D-1DCCDBCB7D55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2941011-3C88-4B69-B39D-1DCCDBCB7D55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2941011-3C88-4B69-B39D-1DCCDBCB7D55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2941011-3C88-4B69-B39D-1DCCDBCB7D55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9EE5725-7DB3-4691-8D09-B61C2F41FCA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9EE5725-7DB3-4691-8D09-B61C2F41FCA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9EE5725-7DB3-4691-8D09-B61C2F41FCA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9EE5725-7DB3-4691-8D09-B61C2F41FCA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

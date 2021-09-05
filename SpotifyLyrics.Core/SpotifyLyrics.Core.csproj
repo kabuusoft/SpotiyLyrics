@@ -11,6 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SpotifyLyrics.Common\SpotifyLyrics.Common.csproj" />
+    <ProjectReference Include="..\SpotifyLyrics.Data\SpotifyLyrics.Data.csproj" />
     <ProjectReference Include="..\SpotifyLyrics.Plugin\SpotifyLyrics.Plugin.csproj" />
   </ItemGroup>
 

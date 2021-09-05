@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
 using Microsoft.Extensions.Logging;
+using SpotifyLyrics.Common;
 using SpotifyLyrics.Core.Abstract;
 using SpotifyLyrics.Plugin.Abstract;
 

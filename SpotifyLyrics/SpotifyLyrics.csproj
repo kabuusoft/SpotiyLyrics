@@ -8,6 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.36" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.18" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.18" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.18">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.18" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.18" />
@@ -15,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SpotifyLyrics.Core\SpotifyLyrics.Core.csproj" />
+    <ProjectReference Include="..\SpotifyLyrics.Data\SpotifyLyrics.Data.csproj" />
     <ProjectReference Include="..\SpotifyLyrics.Plugin\SpotifyLyrics.Plugin.csproj" />
   </ItemGroup>
 

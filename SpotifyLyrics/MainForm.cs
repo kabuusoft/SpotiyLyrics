@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SpotifyLyrics.Core.Abstract;
@@ -15,11 +7,11 @@ namespace SpotifyLyrics
 {
     public partial class MainForm : Form
     {
-        private readonly ISpotifyManager _spotifyManager;
         private readonly IDownloadManager _downloadManager;
         private readonly ISongNameParser _songNameParser;
+        private readonly ISpotifyManager _spotifyManager;
 
-        private bool _isDownloading = false;
+        private bool _isDownloading;
         private string _previousSpotifyWindowTitle = string.Empty;
 
         public MainForm(ISpotifyManager spotifyManager, IDownloadManager downloadManager, ISongNameParser songNameParser)
@@ -30,14 +22,9 @@ namespace SpotifyLyrics
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-        }
-
         private async void SpotifyWatchDogTimer_Tick(object sender, EventArgs e)
         {
             if (!_isDownloading)
-            {
                 if (_spotifyManager.IsSpotifyWorking())
                 {
                     var currentSpotifyWindowTitle = _spotifyManager.GetSpotifyWindowTitle();
@@ -50,16 +37,12 @@ namespace SpotifyLyrics
                         await DoDownloadLyricWithWindowTitle(currentSpotifyWindowTitle);
                     }
                 }
-            }
         }
 
         private async Task DoDownloadLyricWithWindowTitle(string currentSpotifyWindowTitle)
         {
             // Todo: cancel current download
-            if (_isDownloading)
-            {
-                return;
-            }
+            if (_isDownloading) return;
 
             var artistAndSongInfo = _songNameParser.GetSongNameAndArtistFromWindowTitle(currentSpotifyWindowTitle);
 
@@ -83,9 +66,7 @@ namespace SpotifyLyrics
             _isDownloading = true;
             try
             {
-                string lyricFilePath = Path.Combine(AppContext.BaseDirectory, _songNameParser.GenerateLyricFileName(currentSpotifyWindowTitle) + ".txt");
-
-                string lyricContent = await _downloadManager.DownloadLyric(artistAndSongInfo.artist, artistAndSongInfo.songName, lyricFilePath);
+                var lyricContent = await _downloadManager.DownloadLyric(artistAndSongInfo.artist, artistAndSongInfo.songName, currentSpotifyWindowTitle, forceDownload);
 
                 LyricBox.Text = lyricContent;
             }
@@ -98,23 +79,17 @@ namespace SpotifyLyrics
 
         private async Task DoForceDownload()
         {
-            if (_isDownloading)
-            {
-                return;
-            }
+            if (_isDownloading) return;
 
-            string artist = ArtistEdit.Text.Trim();
-            string song = SongTitleEdit.Text.Trim();
+            var artist = ArtistEdit.Text.Trim();
+            var song = SongTitleEdit.Text.Trim();
             if (string.IsNullOrEmpty(artist) || string.IsNullOrEmpty(song))
             {
                 MessageBox.Show("Please enter both artist and song.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (string.IsNullOrEmpty(_previousSpotifyWindowTitle))
-            {
-                return;
-            }
+            if (string.IsNullOrEmpty(_previousSpotifyWindowTitle)) return;
 
             await DoDownloadLyric(_previousSpotifyWindowTitle, (artist, song), true);
         }
@@ -125,6 +100,7 @@ namespace SpotifyLyrics
             SongTitleEdit.Enabled = false;
             ForceDownloadBtn.Enabled = false;
         }
+
         private void DoNormalUiState()
         {
             ArtistEdit.Enabled = true;
@@ -144,23 +120,16 @@ namespace SpotifyLyrics
 
         private async void ArtistEdit_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-                await DoForceDownload();
-            }
+            if (e.KeyChar == (char) Keys.Enter) await DoForceDownload();
         }
 
         private void SongTitleEdit_KeyDown(object sender, KeyEventArgs e)
         {
-
         }
 
         private async void SongTitleEdit_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-                await DoForceDownload();
-            }
+            if (e.KeyChar == (char) Keys.Enter) await DoForceDownload();
         }
     }
 }

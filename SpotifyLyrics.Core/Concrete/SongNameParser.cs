@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Extensions.Logging;
+using SpotifyLyrics.Common;
 using SpotifyLyrics.Core.Abstract;
 
 namespace SpotifyLyrics.Core.Concrete

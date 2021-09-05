@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.Extensions.Logging;
 
-namespace SpotifyLyrics.Core.Abstract
+namespace SpotifyLyrics.Common
 {
     public abstract class BaseLog<T> where T: class
     {
