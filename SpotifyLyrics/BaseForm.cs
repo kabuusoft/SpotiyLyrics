@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace SpotifyLyrics
 {
-    public abstract class BaseForm : Form
+    public class BaseForm : Form
     {
         protected void SetColors()
         {

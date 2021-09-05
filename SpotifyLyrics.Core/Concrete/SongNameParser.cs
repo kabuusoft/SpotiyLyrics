@@ -21,7 +21,7 @@ namespace SpotifyLyrics.Core.Concrete
                     string artist = windowTitle.Substring(0, index);
                     string song = windowTitle.Substring(index + 1);
 
-                    return (artist, song);
+                    return (artist.Trim(), song.Trim());
                 }
                 else
                 {

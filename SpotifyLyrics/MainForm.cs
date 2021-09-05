@@ -78,7 +78,7 @@ namespace SpotifyLyrics
                 }
                 else
                 {
-                    MessageLabel.Text = $"Lyric source {lyricContent.source}.";
+                    MessageLabel.Text = $"Lyric source is {lyricContent.source}.";
                 }
                 LyricBox.Text = lyricContent.lyric;
             }

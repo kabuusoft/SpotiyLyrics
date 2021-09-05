@@ -29,7 +29,7 @@ namespace SpotifyLyrics.Core.Concrete
                     var lyric = await _lyricService.GetLyric(windowTitle);
                     if (!string.IsNullOrEmpty(lyric))
                     {
-                        return (lyric, "Cache");
+                        return (lyric, "local database");
                     }
                 }
 
@@ -42,7 +42,7 @@ namespace SpotifyLyrics.Core.Concrete
                             var saveResult = await _lyricService.AddLyric(windowTitle, lyricContent);
                             if (!string.IsNullOrEmpty(saveResult)) LogError($"DownloadLyric save error {saveResult}.");
 
-                            return (lyricContent, plugin.GetTitle());
+                            return (lyricContent, plugin.GetWebSite());
                         }
                     }
                     catch (Exception e)
