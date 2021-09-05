@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using SpotifyLyrics.Common;
@@ -12,8 +11,8 @@ namespace SpotifyLyrics.Core.Concrete
 {
     public class DownloadManager : BaseLog<DownloadManager>, IDownloadManager
     {
-        private readonly List<IPlugin> _plugins;
         private readonly ILyricService _lyricService;
+        private readonly List<IPlugin> _plugins;
 
         public DownloadManager(ILogger<DownloadManager> logger, IPluginManager pluginManager, ILyricService lyricService) : base(logger)
         {
@@ -27,25 +26,18 @@ namespace SpotifyLyrics.Core.Concrete
             {
                 if (!forceRedownload)
                 {
-                    string lyric = await _lyricService.GetLyric(windowTitle);
-                    if (!string.IsNullOrEmpty(lyric))
-                    {
-                        return lyric;
-                    }
+                    var lyric = await _lyricService.GetLyric(windowTitle);
+                    if (!string.IsNullOrEmpty(lyric)) return lyric;
                 }
 
                 foreach (var plugin in _plugins)
-                {
                     try
                     {
                         var lyricContent = await plugin.DownloadLyric(artist, songTitle);
                         if (!string.IsNullOrEmpty(lyricContent))
                         {
-                            string saveResult = await _lyricService.AddLyric(windowTitle, lyricContent);
-                            if (!string.IsNullOrEmpty(saveResult))
-                            {
-                                LogError($"DownloadLyric save error {saveResult}.");
-                            }
+                            var saveResult = await _lyricService.AddLyric(windowTitle, lyricContent);
+                            if (!string.IsNullOrEmpty(saveResult)) LogError($"DownloadLyric save error {saveResult}.");
 
                             return lyricContent;
                         }
@@ -54,7 +46,6 @@ namespace SpotifyLyrics.Core.Concrete
                     {
                         LogError($"DownloadLyric for loop plugin {plugin.GetTitle()} {plugin.GetVersion()}", e);
                     }
-                }
 
                 return string.Empty;
             }
