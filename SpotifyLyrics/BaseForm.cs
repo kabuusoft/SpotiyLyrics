@@ -41,6 +41,20 @@ namespace SpotifyLyrics
                 groupBox.BackColor = ColorConstants.FormBackground;
                 groupBox.ForeColor = ColorConstants.LabelText;
             }
+
+            var menuItems = GetAllControlsOfType(this, typeof(ToolStripMenuItem));
+            foreach (var menuItem in menuItems)
+            {
+                menuItem.BackColor = ColorConstants.FormBackground;
+                menuItem.ForeColor = ColorConstants.LabelText;
+            }
+
+            var menus = GetAllControlsOfType(this, typeof(ContextMenuStrip));
+            foreach (var menuItem in menus)
+            {
+                menuItem.BackColor = ColorConstants.FormBackground;
+                menuItem.ForeColor = ColorConstants.LabelText;
+            }
         }
         
         private IEnumerable<Control> GetAllControlsOfType(Control control, Type type)
@@ -50,6 +64,24 @@ namespace SpotifyLyrics
             return controls.SelectMany(ctrl => GetAllControlsOfType(ctrl, type))
                 .Concat(controls)
                 .Where(c => c.GetType() == type);
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // BaseForm
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "BaseForm";
+            this.Load += new System.EventHandler(this.BaseForm_Load);
+            this.ResumeLayout(false);
+
+        }
+
+        private void BaseForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

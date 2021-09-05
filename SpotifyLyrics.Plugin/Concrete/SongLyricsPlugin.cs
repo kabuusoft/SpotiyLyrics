@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
 using SpotifyLyrics.Plugin.Abstract;
@@ -44,29 +42,6 @@ namespace SpotifyLyrics.Plugin.Concrete
             }
         }
 
-        private object DoFixParameters(string str)
-        {
-            var tmp = str.ToLowerInvariant()
-                .Replace(" ", "-")
-                .Replace("&", "")
-                .Replace("Ö", "ö")
-                .Replace(",", "")
-                .Replace("!", "")
-                .Replace("?", "")
-                .Replace("(", "")
-                .Replace(")", "")
-                .Replace("[", "")
-                .Replace("!", "")
-                .Replace("]", "")
-                .Replace(".", "")
-                .Replace("*", "")
-                .Replace("'", "")
-                .Replace("ö", "o")
-                .Replace("- remastered", "");
-
-            return TurkishCharacterToEnglish(tmp);
-        }
-
         public string GetTitle()
         {
             return "https://www.songlyrics.com downloader";
@@ -90,6 +65,29 @@ namespace SpotifyLyrics.Plugin.Concrete
         public bool IsActive()
         {
             return true;
+        }
+
+        private object DoFixParameters(string str)
+        {
+            var tmp = str.ToLowerInvariant()
+                .Replace(" ", "-")
+                .Replace("&", "")
+                .Replace("Ö", "ö")
+                .Replace(",", "")
+                .Replace("!", "")
+                .Replace("?", "")
+                .Replace("(", "")
+                .Replace(")", "")
+                .Replace("[", "")
+                .Replace("!", "")
+                .Replace("]", "")
+                .Replace(".", "")
+                .Replace("*", "")
+                .Replace("'", "")
+                .Replace("ö", "o")
+                .Replace("- remastered", "");
+
+            return TurkishCharacterToEnglish(tmp);
         }
     }
 }

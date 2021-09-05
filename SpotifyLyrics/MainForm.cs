@@ -144,5 +144,13 @@ namespace SpotifyLyrics
         {
             if (e.KeyChar == (char) Keys.Enter) await DoForceDownload();
         }
+
+        private void SettingsBtn_Click(object sender, EventArgs e)
+        {
+            Button btnSender = (Button)sender;
+            Point ptLowerLeft = new Point(0, btnSender.Height);
+            ptLowerLeft = btnSender.PointToScreen(ptLowerLeft);
+            SettingsMenu.Show(ptLowerLeft);
+        }
     }
 }

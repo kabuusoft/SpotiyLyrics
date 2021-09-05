@@ -40,9 +40,13 @@ namespace SpotifyLyrics
             this.label1 = new System.Windows.Forms.Label();
             this.MessageLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.SettingsBtn = new System.Windows.Forms.Button();
+            this.SettingsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.SettingsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // SpotifyWatchDogTimer
@@ -146,7 +150,7 @@ namespace SpotifyLyrics
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.SettingsBtn);
             this.panel1.Controls.Add(this.MessageLabel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 480);
@@ -154,19 +158,46 @@ namespace SpotifyLyrics
             this.panel1.Size = new System.Drawing.Size(460, 30);
             this.panel1.TabIndex = 6;
             // 
-            // button1
+            // SettingsBtn
             // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(419, 0);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(41, 30);
-            this.button1.TabIndex = 5;
-            this.button1.Text = ". . .";
-            this.button1.UseVisualStyleBackColor = true;
+            this.SettingsBtn.Dock = System.Windows.Forms.DockStyle.Right;
+            this.SettingsBtn.FlatAppearance.BorderSize = 0;
+            this.SettingsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SettingsBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.SettingsBtn.Location = new System.Drawing.Point(419, 0);
+            this.SettingsBtn.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.SettingsBtn.Name = "SettingsBtn";
+            this.SettingsBtn.Size = new System.Drawing.Size(41, 30);
+            this.SettingsBtn.TabIndex = 5;
+            this.SettingsBtn.Text = ". . .";
+            this.SettingsBtn.UseVisualStyleBackColor = true;
+            this.SettingsBtn.Click += new System.EventHandler(this.SettingsBtn_Click);
+            // 
+            // SettingsMenu
+            // 
+            this.SettingsMenu.BackColor = System.Drawing.SystemColors.Control;
+            this.SettingsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.toolStripMenuItem2});
+            this.SettingsMenu.Name = "SettingsMenu";
+            this.SettingsMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.SettingsMenu.Size = new System.Drawing.Size(181, 70);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem1.Text = "Settings";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem2.Text = "About";
             // 
             // MainForm
             // 
@@ -183,6 +214,7 @@ namespace SpotifyLyrics
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.SettingsMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -199,7 +231,10 @@ namespace SpotifyLyrics
         private System.Windows.Forms.Button ForceDownloadBtn;
         private System.Windows.Forms.Label MessageLabel;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button SettingsBtn;
+        private System.Windows.Forms.ContextMenuStrip SettingsMenu;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
     }
 }
 
