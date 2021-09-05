@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SpotifyLyrics.Core.Abstract;
 
 namespace SpotifyLyrics
 {
-    public partial class MainForm : Form
+    public partial class MainForm : BaseForm
     {
         private readonly IDownloadManager _downloadManager;
         private readonly ISongNameParser _songNameParser;
@@ -64,11 +67,20 @@ namespace SpotifyLyrics
         {
             DoDownloadingUiState();
             _isDownloading = true;
+            MessageLabel.Text = "Searching for lyric...";
             try
             {
                 var lyricContent = await _downloadManager.DownloadLyric(artistAndSongInfo.artist, artistAndSongInfo.songName, currentSpotifyWindowTitle, forceDownload);
 
-                LyricBox.Text = lyricContent;
+                if (string.IsNullOrEmpty(lyricContent.lyric))
+                {
+                    MessageLabel.Text = "Unable to find lyric.";
+                }
+                else
+                {
+                    MessageLabel.Text = $"Lyric source {lyricContent.source}.";
+                }
+                LyricBox.Text = lyricContent.lyric;
             }
             finally
             {
@@ -110,6 +122,7 @@ namespace SpotifyLyrics
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            SetColors();
             SpotifyWatchDogTimer.Enabled = true;
         }
 

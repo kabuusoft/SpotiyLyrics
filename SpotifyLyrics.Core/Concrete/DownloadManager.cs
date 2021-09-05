@@ -20,14 +20,17 @@ namespace SpotifyLyrics.Core.Concrete
             _plugins = pluginManager.LoadPlugins();
         }
 
-        public async Task<string> DownloadLyric(string artist, string songTitle, string windowTitle, bool forceRedownload = false)
+        public async Task<(string lyric, string source)> DownloadLyric(string artist, string songTitle, string windowTitle, bool forceRedownload = false)
         {
             try
             {
                 if (!forceRedownload)
                 {
                     var lyric = await _lyricService.GetLyric(windowTitle);
-                    if (!string.IsNullOrEmpty(lyric)) return lyric;
+                    if (!string.IsNullOrEmpty(lyric))
+                    {
+                        return (lyric, "Cache");
+                    }
                 }
 
                 foreach (var plugin in _plugins)
@@ -39,7 +42,7 @@ namespace SpotifyLyrics.Core.Concrete
                             var saveResult = await _lyricService.AddLyric(windowTitle, lyricContent);
                             if (!string.IsNullOrEmpty(saveResult)) LogError($"DownloadLyric save error {saveResult}.");
 
-                            return lyricContent;
+                            return (lyricContent, plugin.GetTitle());
                         }
                     }
                     catch (Exception e)
@@ -47,12 +50,12 @@ namespace SpotifyLyrics.Core.Concrete
                         LogError($"DownloadLyric for loop plugin {plugin.GetTitle()} {plugin.GetVersion()}", e);
                     }
 
-                return string.Empty;
+                return (string.Empty, string.Empty);
             }
             catch (Exception e)
             {
                 LogFatal("DownloadLyric", e);
-                return string.Empty;
+                return (string.Empty, string.Empty);
             }
         }
     }

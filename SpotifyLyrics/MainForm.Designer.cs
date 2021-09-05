@@ -38,6 +38,7 @@ namespace SpotifyLyrics
             this.ArtistEdit = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.MessageLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,7 +57,7 @@ namespace SpotifyLyrics
             this.LyricBox.Name = "LyricBox";
             this.LyricBox.ReadOnly = true;
             this.LyricBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.LyricBox.Size = new System.Drawing.Size(436, 332);
+            this.LyricBox.Size = new System.Drawing.Size(436, 311);
             this.LyricBox.TabIndex = 1;
             // 
             // groupBox1
@@ -78,6 +79,8 @@ namespace SpotifyLyrics
             // ForceDownloadBtn
             // 
             this.ForceDownloadBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ForceDownloadBtn.FlatAppearance.BorderSize = 0;
+            this.ForceDownloadBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ForceDownloadBtn.Location = new System.Drawing.Point(355, 22);
             this.ForceDownloadBtn.Name = "ForceDownloadBtn";
             this.ForceDownloadBtn.Size = new System.Drawing.Size(75, 52);
@@ -125,11 +128,24 @@ namespace SpotifyLyrics
             this.label1.TabIndex = 0;
             this.label1.Text = "Artist:";
             // 
+            // MessageLabel
+            // 
+            this.MessageLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.MessageLabel.Location = new System.Drawing.Point(0, 432);
+            this.MessageLabel.Margin = new System.Windows.Forms.Padding(12);
+            this.MessageLabel.Name = "MessageLabel";
+            this.MessageLabel.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
+            this.MessageLabel.Size = new System.Drawing.Size(460, 18);
+            this.MessageLabel.TabIndex = 4;
+            this.MessageLabel.Tag = "";
+            this.MessageLabel.Text = "Ready";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(460, 450);
+            this.Controls.Add(this.MessageLabel);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.LyricBox);
             this.DoubleBuffered = true;
@@ -152,6 +168,7 @@ namespace SpotifyLyrics
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button ForceDownloadBtn;
+        private System.Windows.Forms.Label MessageLabel;
     }
 }
 
